@@ -14,33 +14,30 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table ( name ="order_header" )
-public class OrderHeader {
+@Table ( name ="sys_user" )
+public class SysUser {
 
 
-	/**
-	 * 订单头id
-	 */
-   	@Column(name = "order_header_id" )
-	private Integer orderHeaderId;
+   	@Column(name = "user_id" )
+	private Integer userId;
 
 	/**
-	 * 订单编号
+	 * 用户编号
 	 */
-   	@Column(name = "order_number" )
-	private String orderNumber;
+   	@Column(name = "user_number" )
+	private String userNumber;
 
 	/**
-	 * 客户id
+	 * 用户名称
 	 */
-   	@Column(name = "customer_user_id" )
-	private Integer customerUserId;
+   	@Column(name = "user_name" )
+	private String userName;
 
 	/**
-	 * 备注
+	 * 用户地址
 	 */
-   	@Column(name = "remark" )
-	private String remark;
+   	@Column(name = "address" )
+	private String address;
 
 	/**
 	 * 版本号

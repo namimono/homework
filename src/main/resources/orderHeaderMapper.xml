@@ -8,4 +8,43 @@
     <select id="getOrderHeader" resultType="com.wuxiao.bussiness.model.OrderHeader">
         select * from order_header where order_header_id = 1
     </select>
+    <!--  List<OrderLineQueryResult> selectOrderLinesByCondition(OrderLineQueryCondition condition);  -->
+    <select id="selectOrderLinesByCondition" parameterType="com.wuxiao.bussiness.order.model.OrderLineQueryCondition"
+            resultType="com.wuxiao.bussiness.order.model.OrderLineQueryResult">
+        select oh.order_number,
+            su.user_name,
+            su.address,
+            oh.remark,
+            oh.created_by,
+            ol.order_line_number,
+            ol.item_code,
+            ol.item_name,
+            ol.unit_price,
+            ol.quantity,
+            ol.line_amount
+        from order_line ol
+        left join order_header oh on ol.order_header_id = oh.order_header_id
+        left join sys_user su on oh.customer_user_id = su.user_id
+        where 1=1
+
+        <if test="condition.orderNumber !=null and condition.orderNumber != ''">
+            and oh.order_number like CONCAT('%', #{condition.orderNumber}, '%')
+        </if>
+        <if test="condition.orderLineNumber !=null and condition.orderLineNumber != ''">
+            and ol.order_line_number = #{condition.orderLineNumber}
+        </if>
+        <if test="condition.itemCode !=null and condition.itemCode != ''">
+            and ol.item_code like CONCAT('%', #{condition.itemCode}, '%')
+        </if>
+        <if test="condition.itemName !=null and condition.itemName != ''">
+            and ol.item_name like CONCAT('%', #{condition.itemName}, '%')
+        </if>
+        <if test="condition.createdBy !=null and condition.createdBy != ''">
+            and oh.created_by = #{condition.createBy}
+        </if>
+        <if test="condition.customerUserId !=null and condition.customerUserId != ''">
+            and oh.customer_user_id = #{condition.customerUserId}
+        </if>
+
+    </select>
 </mapper>

@@ -1,17 +1,16 @@
 package nakami;
 
-import com.wuxiao.bussiness.model.OrderHeader;
+import com.wuxiao.bussiness.order.dao.OrderHeaderDao;
+import com.wuxiao.bussiness.order.model.OrderLineQueryCondition;
+import com.wuxiao.bussiness.order.model.OrderLineQueryResult;
 import com.wuxiao.bussiness.order.service.OrderService;
-import com.wuxiao.bussiness.order.service.impl.OrderServiceImpl;
 import com.wuxiao.config.ConfigIOC;
-import com.wuxiao.person.method.ChineseSay;
 import com.wuxiao.person.method.ISay;
 import com.wuxiao.person.model.Person;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import sun.applet.Main;
 
 import java.util.List;
 
@@ -63,12 +62,26 @@ public class test {
 
 
     @Test
-    public void testGetOrderHeaderList(){
+    public void testGetOrderHeader(){
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
-        OrderService orderService = applicationContext.getBean(OrderServiceImpl.class);
-        OrderHeader orderHeaderList = orderService.getOrderHeader();
+        OrderHeaderDao orderHeaderDao = applicationContext.getBean(OrderHeaderDao.class);
+        OrderHeader orderHeaderList = orderHeaderDao.getOrderHeader();
         System.out.println(orderHeaderList);
     }
+
+    @Test
+    public void TestSelectOrderLinesByCondition(){
+        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+        OrderHeaderDao orderHeaderDao = applicationContext.getBean(OrderHeaderDao.class);
+        OrderLineQueryCondition condition = new OrderLineQueryCondition();
+        condition.setItemCode("00");
+        condition.setItemName("卫龙");
+
+        List<OrderLineQueryResult> orderLineQueryResults = orderHeaderDao.selectOrderLinesByCondition(condition);
+        System.out.println(orderLineQueryResults);
+    }
+
+
 
 
 }

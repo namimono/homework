@@ -9,14 +9,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.util.Date;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table ( name ="order_header" )
-public class OrderHeader {
+@Table ( name ="order_line" )
+public class OrderLine {
 
+
+	/**
+	 * 订单行id
+	 */
+   	@Column(name = "order_line_id" )
+	private Integer orderLineId;
 
 	/**
 	 * 订单头id
@@ -25,22 +32,40 @@ public class OrderHeader {
 	private Integer orderHeaderId;
 
 	/**
-	 * 订单编号
+	 * 订单行号
 	 */
-   	@Column(name = "order_number" )
-	private String orderNumber;
+   	@Column(name = "order_line_number" )
+	private Integer orderLineNumber;
 
 	/**
-	 * 客户id
+	 * 物料编码
 	 */
-   	@Column(name = "customer_user_id" )
-	private Integer customerUserId;
+   	@Column(name = "item_code" )
+	private String itemCode;
 
 	/**
-	 * 备注
+	 * 物料名称
 	 */
-   	@Column(name = "remark" )
-	private String remark;
+   	@Column(name = "item_name" )
+	private String itemName;
+
+	/**
+	 * 单价
+	 */
+   	@Column(name = "unit_price" )
+	private BigDecimal unitPrice;
+
+	/**
+	 * 数量
+	 */
+   	@Column(name = "quantity" )
+	private BigDecimal quantity;
+
+	/**
+	 * 行总价
+	 */
+   	@Column(name = "line_amount" )
+	private BigDecimal lineAmount;
 
 	/**
 	 * 版本号
