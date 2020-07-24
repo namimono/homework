@@ -1,13 +1,11 @@
 package nakami;
 
-import com.wuxiao.bussiness.model.OrderHeader;
 import com.wuxiao.bussiness.model.SysUser;
 import com.wuxiao.bussiness.order.dao.OrderHeaderDao;
 import com.wuxiao.bussiness.order.model.OrderLineQueryCondition;
 import com.wuxiao.bussiness.order.model.OrderLineQueryResult;
 import com.wuxiao.bussiness.order.service.OrderService;
 import com.wuxiao.bussiness.user.service.SysUserService;
-import com.wuxiao.bussiness.user.service.TestService;
 import com.wuxiao.bussiness.user.service.impl.SysUserServiceImpl;
 import com.wuxiao.config.ConfigIOC;
 import com.wuxiao.person.method.ISay;
@@ -16,9 +14,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
 
 public class test {
@@ -50,12 +46,7 @@ public class test {
 
     }
 
-    @Test
-    public void testTest() {
-        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
-        TestService bean = applicationContext.getBean(TestService.class);
-        bean.get();
-    }
+
 
     @Test
     public void testPerson() {
