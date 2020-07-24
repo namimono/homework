@@ -13,4 +13,7 @@ public interface SysUserDao {
     int updateUser(@Param("user") SysUser user);
 
     SysUser selectById(@Param("user") SysUser user);
+
+
+    int deleteUser(@Param("userId")Long userId);
 }

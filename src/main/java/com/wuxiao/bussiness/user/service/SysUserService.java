@@ -7,4 +7,6 @@ public interface SysUserService {
     int insertUser(SysUser user);
 
     int updateUser(SysUser user);
+
+    int deleteUser(Long userId);
 }

@@ -47,4 +47,8 @@ public class SysUserServiceImpl implements SysUserService {
         }
         return 0;
     }
+
+    public int deleteUser(Long userId) {
+        return sysUserDao.deleteUser(userId);
+    }
 }

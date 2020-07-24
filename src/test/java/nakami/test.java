@@ -93,8 +93,8 @@ public class test {
         SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
         SysUser sysUser = new SysUser();
         sysUser.setAddress("上海");
-        sysUser.setUserName("吴晓");
-        sysUser.setUserNumber("20004");
+        sysUser.setUserName("wuxiao");
+        sysUser.setUserNumber("20006");
 
 
         int i = sysUserService.insertUser(sysUser);
@@ -104,13 +104,23 @@ public class test {
     }
 
     @Test
-    public void TestUpdateUser(){
+    public void TestUpdateUser() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
         SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
         SysUser sysUser = new SysUser();
         sysUser.setUserId(14);
         sysUser.setUserName("吴晓3");
         sysUserService.updateUser(sysUser);
+
+    }
+
+    @Test
+    public void TestDeleteUser() {
+        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+        SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
+
+
+        System.out.println("删除了" + sysUserService.deleteUser(16L) + "个数据");
 
     }
 
