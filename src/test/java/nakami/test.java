@@ -6,6 +6,8 @@ import com.wuxiao.bussiness.order.dao.OrderHeaderDao;
 import com.wuxiao.bussiness.order.model.OrderLineQueryCondition;
 import com.wuxiao.bussiness.order.model.OrderLineQueryResult;
 import com.wuxiao.bussiness.order.service.OrderService;
+import com.wuxiao.bussiness.user.service.SysUserService;
+import com.wuxiao.bussiness.user.service.TestService;
 import com.wuxiao.bussiness.user.service.impl.SysUserServiceImpl;
 import com.wuxiao.config.ConfigIOC;
 import com.wuxiao.person.method.ISay;
@@ -14,6 +16,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +25,8 @@ public class test {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private SysUserService sysUserService;
 
     public void showBeans(ApplicationContext applicationContext) {
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
@@ -39,10 +44,17 @@ public class test {
     }
 
     @Test
-    public void test1() {
+    public void TestShowBean() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
         showBeans(applicationContext);
 
+    }
+
+    @Test
+    public void testTest() {
+        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+        TestService bean = applicationContext.getBean(TestService.class);
+        bean.get();
     }
 
     @Test
@@ -90,11 +102,13 @@ public class test {
     @Test
     public void TestInsertUser() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+        showBeans(applicationContext);
         SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
+
         SysUser sysUser = new SysUser();
         sysUser.setAddress("上海");
         sysUser.setUserName("wuxiao");
-        sysUser.setUserNumber("20006");
+        sysUser.setUserNumber("20016");
 
 
         int i = sysUserService.insertUser(sysUser);
@@ -109,7 +123,7 @@ public class test {
         SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
         SysUser sysUser = new SysUser();
         sysUser.setUserId(14);
-        sysUser.setUserName("吴晓3");
+        sysUser.setUserName("吴晓4");
         sysUserService.updateUser(sysUser);
 
     }

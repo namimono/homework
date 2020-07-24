@@ -1,12 +1,12 @@
 package com.wuxiao.config;
 
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.wuxiao.person.aspect.ISayAspect;
 import com.wuxiao.person.method.ChineseSay;
 import com.wuxiao.person.method.EnglishSay;
 import com.wuxiao.person.method.ISay;
 import com.wuxiao.person.model.Person;
-import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,19 +18,21 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
+//@EnableTransactionManagement
 @Configuration
-@EnableAspectJAutoProxy
+//@EnableAspectJAutoProxy
 @ComponentScan(value = "com.wuxiao.bussiness.*", excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class})
 })
 @PropertySource("classpath:db.properties")
 @MapperScan("com.wuxiao.bussiness.*.dao")
-//@EnableTransactionManagement
 public class ConfigIOC {
     @Value("${url}")
     private String url;
@@ -63,12 +65,13 @@ public class ConfigIOC {
 //    配置hikari数据源
     @Bean
     public DataSource dataSource(){
-        HikariDataSource hikariDataSource = new HikariDataSource();
-        hikariDataSource.setJdbcUrl(url);
-        hikariDataSource.setDriverClassName(driver);
-        hikariDataSource.setUsername(user);
-        hikariDataSource.setPassword(password);
-        return hikariDataSource;
+//
+        DruidDataSource dataSource=new DruidDataSource();
+        dataSource.setUsername(user);
+        dataSource.setUrl(url);
+        dataSource.setDriverClassName(driver);
+        dataSource.setPassword(password);
+        return dataSource;
     }
 //  整合mybatis
     @Bean
@@ -83,17 +86,22 @@ public class ConfigIOC {
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean
-    public SqlSessionTemplate sqlSession() throws Exception {
-        return new SqlSessionTemplate(sqlSessionFactory());
-    }
+//    @Bean
+//    public SqlSessionTemplate sqlSession() throws Exception {
+//        return new SqlSessionTemplate(sqlSessionFactory());
+//    }
 
 
 //    配置事务管理器
     @Bean
-    public DataSourceTransactionManager transactionManager(DataSource dataSource) throws PropertyVetoException {
+    public DataSourceTransactionManager transactionManager() throws PropertyVetoException {
 
-        return new DataSourceTransactionManager(dataSource);
+        return new DataSourceTransactionManager(dataSource());
     }
+
+//    @Bean
+//    public TransactionTemplate transactionTemplate() throws PropertyVetoException {
+//        return new TransactionTemplate(transactionManager());
+//    }
 
 }

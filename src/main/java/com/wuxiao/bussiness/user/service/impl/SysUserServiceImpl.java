@@ -29,10 +29,10 @@ public class SysUserServiceImpl implements SysUserService {
         user.setLastUpdatedBy(1);
         int i = sysUserDao.insertUser(user);
         System.out.println(user.getUserId());
-
         return i;
     }
 
+    @Transactional
     public int updateUser(SysUser user) {
         SysUser sysUser = sysUserDao.selectById(user);
 //        更新sysUser
