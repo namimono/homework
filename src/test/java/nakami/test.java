@@ -103,5 +103,15 @@ public class test {
 
     }
 
+    @Test
+    public void TestUpdateUser(){
+        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+        SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
+        SysUser sysUser = new SysUser();
+        sysUser.setUserId(14);
+        sysUser.setUserName("吴晓3");
+        sysUserService.updateUser(sysUser);
+
+    }
 
 }

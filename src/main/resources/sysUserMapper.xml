@@ -5,9 +5,14 @@
 
 
 <mapper namespace="com.wuxiao.bussiness.user.dao.SysUserDao">
+    <!--    SysUser selectById(SysUser user);-->
+    <select id="selectById" parameterType="com.wuxiao.bussiness.model.SysUser"
+            resultType="com.wuxiao.bussiness.model.SysUser">
+        select * from sys_user where user_id =#{user.userId}
+    </select>
     <!--    int insertUser(SysUser user);-->
-
-    <insert id="insertUser" parameterType="com.wuxiao.bussiness.user.dao.SysUserDao" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUser" parameterType="com.wuxiao.bussiness.model.SysUser" useGeneratedKeys="true"
+            keyProperty="userId">
 
         insert into sys_user (user_number, user_name, address,
             object_version_number, creation_date, created_by, last_update_date, last_updated_by)
@@ -16,4 +21,42 @@
             #{user.lastUpdateDate}, #{user.lastUpdatedBy}
         );
     </insert>
+    <!--    int updateUser(SysUser user);-->
+    <update id="updateUser" parameterType="com.wuxiao.bussiness.model.SysUser">
+        update sys_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user.userId !=null and user.userId != ''">
+                user_id = #{user.userId},
+            </if>
+            <if test="user.userNumber !=null and user.userNumber != ''">
+                user_number = #{user.userNumber},
+            </if>
+            <if test="user.userName !=null and user.userName != ''">
+                user_name = #{user.userName},
+            </if>
+            <if test="user.address !=null and user.address != ''">
+                address = #{user.address},
+            </if>
+            <if test="user.objectVersionNumber !=null">
+                object_version_number = #{user.objectVersionNumber} + 1,
+            </if>
+            <if test="user.creationDate !=null">
+                creation_date = #{user.creationDate},
+            </if>
+            <if test="user.createdBy !=null">
+                created_by = #{user.createdBy},
+            </if>
+            <if test="user.lastUpdateDate !=null">
+                last_update_date = #{user.lastUpdateDate},
+            </if>
+            <if test="user.lastUpdatedBy !=null">
+                last_updated_by = #{user.lastUpdatedBy},
+            </if>
+        </trim>
+    where user_id = #{user.userId} and object_version_number = #{user.objectVersionNumber}
+    </update>
+
+
+
+
 </mapper>

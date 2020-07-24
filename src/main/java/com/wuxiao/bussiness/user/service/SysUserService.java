@@ -6,4 +6,5 @@ public interface SysUserService {
 
     int insertUser(SysUser user);
 
+    int updateUser(SysUser user);
 }
