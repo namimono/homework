@@ -7,13 +7,11 @@
 <mapper namespace="com.wuxiao.bussiness.user.dao.SysUserDao">
     <!--    int insertUser(SysUser user);-->
 
-    <insert id="insertUser" parameterType="com.wuxiao.bussiness.user.dao.SysUserDao" keyProperty="id">
-        <selectKey resultType="java.lang.Integer" keyProperty="userId">
-            select userId
-        </selectKey>
+    <insert id="insertUser" parameterType="com.wuxiao.bussiness.user.dao.SysUserDao" useGeneratedKeys="true" keyProperty="userId">
+
         insert into sys_user  values (#{user.userId}, #{user.userNumber}, #{user.userName},
             #{user.address}, #{user.objectVersionNumber}, #{user.creationDate}, #{user.createdBy},
-            #{user.lastUpdateDate}
+            #{user.lastUpdateDate}, #{user.lastUpdatedBy}
         );
     </insert>
 </mapper>

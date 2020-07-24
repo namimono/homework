@@ -1,9 +1,12 @@
 package nakami;
 
+import com.wuxiao.bussiness.model.OrderHeader;
+import com.wuxiao.bussiness.model.SysUser;
 import com.wuxiao.bussiness.order.dao.OrderHeaderDao;
 import com.wuxiao.bussiness.order.model.OrderLineQueryCondition;
 import com.wuxiao.bussiness.order.model.OrderLineQueryResult;
 import com.wuxiao.bussiness.order.service.OrderService;
+import com.wuxiao.bussiness.user.service.impl.SysUserServiceImpl;
 import com.wuxiao.config.ConfigIOC;
 import com.wuxiao.person.method.ISay;
 import com.wuxiao.person.model.Person;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Date;
 import java.util.List;
 
 public class test {
@@ -61,13 +65,13 @@ public class test {
     }
 
 
-    @Test
-    public void testGetOrderHeader(){
-        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
-        OrderHeaderDao orderHeaderDao = applicationContext.getBean(OrderHeaderDao.class);
-        OrderHeader orderHeaderList = orderHeaderDao.getOrderHeader();
-        System.out.println(orderHeaderList);
-    }
+//    @Test
+//    public void testGetOrderHeader(){
+//        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+//        OrderHeaderDao orderHeaderDao = applicationContext.getBean(OrderHeaderDao.class);
+//        OrderHeader orderHeaderList = orderHeaderDao.getOrderHeader();
+//        System.out.println(orderHeaderList);
+//    }
 
     @Test
     public void TestSelectOrderLinesByCondition(){
@@ -79,6 +83,22 @@ public class test {
 
         List<OrderLineQueryResult> orderLineQueryResults = orderHeaderDao.selectOrderLinesByCondition(condition);
         System.out.println(orderLineQueryResults);
+    }
+
+    @Test
+    public void TestInsertUser(){
+        ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
+        SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
+        SysUser sysUser = new SysUser();
+        sysUser.setAddress("上海");
+        sysUser.setUserName("吴晓");
+        sysUser.setUserNumber("20004");
+
+
+        int i = sysUserService.insertUser(sysUser);
+        System.out.println(i);
+
+
     }
 
 

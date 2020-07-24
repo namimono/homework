@@ -15,10 +15,10 @@ public class OrderServiceImpl implements OrderService {
     private OrderHeaderDao orderHeaderDao;
 
 
-    public OrderHeader getOrderHeader() {
-        return orderHeaderDao.getOrderHeader();
-
-    }
+//    public OrderHeader getOrderHeader() {
+//        return orderHeaderDao.getOrderHeader();
+//
+//    }
 
     public List<OrderLineQueryResult> selectOrderLinesByCondition(OrderLineQueryCondition condition) {
         return orderHeaderDao.selectOrderLinesByCondition(condition);

@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface OrderHeaderDao {
 
-    OrderHeader getOrderHeader();
     List<OrderLineQueryResult> selectOrderLinesByCondition(@Param("condition") OrderLineQueryCondition condition);
 }

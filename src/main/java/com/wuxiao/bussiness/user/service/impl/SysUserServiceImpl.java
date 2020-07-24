@@ -13,11 +13,16 @@ public class SysUserServiceImpl implements SysUserService {
     @Autowired
     SysUserDao sysUserDao;
 
+
     public int insertUser(SysUser user) {
-        SysUser sysUser = new SysUser();
-        sysUser.setAddress("");
-        sysUser.setLastUpdateDate(new Date());
-        sysUser.setCreationDate(new Date());
-        return 0;
+
+        user.setLastUpdateDate(new Date());
+        user.setCreationDate(new Date());
+        user.setObjectVersionNumber(0);
+//        设置创建人
+        user.setCreatedBy(1);
+//        设置最后更新人
+        user.setLastUpdatedBy(1);
+        return sysUserDao.insertUser(user);
     }
 }

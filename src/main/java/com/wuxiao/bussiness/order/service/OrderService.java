@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderHeader getOrderHeader();
 //    4.
     List<OrderLineQueryResult> selectOrderLinesByCondition(OrderLineQueryCondition condition);
 }
