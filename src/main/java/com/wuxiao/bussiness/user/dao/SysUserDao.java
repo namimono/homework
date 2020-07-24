@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SysUserDao {
-    //    5.
+//    5.
     int insertUser(@Param("user") SysUser user);
+
+//    6.
 
 }

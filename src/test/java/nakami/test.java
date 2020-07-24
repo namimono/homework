@@ -22,6 +22,7 @@ public class test {
 
     @Autowired
     private OrderService orderService;
+
     public void showBeans(ApplicationContext applicationContext) {
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
         for (String name : beanDefinitionNames) {
@@ -45,12 +46,13 @@ public class test {
     }
 
     @Test
-    public void testPerson(){
+    public void testPerson() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
         Person bean = applicationContext.getBean(Person.class);
 
         System.out.println(bean);
     }
+
     @Test
     public void testAop() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
@@ -74,7 +76,7 @@ public class test {
 //    }
 
     @Test
-    public void TestSelectOrderLinesByCondition(){
+    public void TestSelectOrderLinesByCondition() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
         OrderHeaderDao orderHeaderDao = applicationContext.getBean(OrderHeaderDao.class);
         OrderLineQueryCondition condition = new OrderLineQueryCondition();
@@ -86,7 +88,7 @@ public class test {
     }
 
     @Test
-    public void TestInsertUser(){
+    public void TestInsertUser() {
         ApplicationContext applicationContext = getApplicationContext(ConfigIOC.class);
         SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
         SysUser sysUser = new SysUser();
@@ -96,12 +98,10 @@ public class test {
 
 
         int i = sysUserService.insertUser(sysUser);
-        System.out.println(i);
+        System.out.println("新增的用户id为：" + i);
 
 
     }
-
-
 
 
 }

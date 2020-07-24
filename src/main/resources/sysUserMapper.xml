@@ -7,9 +7,11 @@
 <mapper namespace="com.wuxiao.bussiness.user.dao.SysUserDao">
     <!--    int insertUser(SysUser user);-->
 
-    <insert id="insertUser" parameterType="com.wuxiao.bussiness.user.dao.SysUserDao" useGeneratedKeys="true" keyProperty="userId">
+    <insert id="insertUser" parameterType="com.wuxiao.bussiness.user.dao.SysUserDao" useGeneratedKeys="true" keyProperty="id">
 
-        insert into sys_user  values (#{user.userId}, #{user.userNumber}, #{user.userName},
+        insert into sys_user (user_number, user_name, address,
+            object_version_number, creation_date, created_by, last_update_date, last_updated_by)
+        values (#{user.userNumber}, #{user.userName},
             #{user.address}, #{user.objectVersionNumber}, #{user.creationDate}, #{user.createdBy},
             #{user.lastUpdateDate}, #{user.lastUpdatedBy}
         );

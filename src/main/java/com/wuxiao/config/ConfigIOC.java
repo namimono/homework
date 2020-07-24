@@ -18,6 +18,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -29,6 +30,7 @@ import java.beans.PropertyVetoException;
 })
 @PropertySource("classpath:db.properties")
 @MapperScan("com.wuxiao.bussiness.*.dao")
+//@EnableTransactionManagement
 public class ConfigIOC {
     @Value("${url}")
     private String url;
