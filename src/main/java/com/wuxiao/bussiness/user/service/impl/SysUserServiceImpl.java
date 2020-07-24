@@ -28,6 +28,7 @@ public class SysUserServiceImpl implements SysUserService {
 //        设置最后更新人
         user.setLastUpdatedBy(1);
         int i = sysUserDao.insertUser(user);
+//        获取到的id为null，不清楚原因
         System.out.println(user.getUserId());
         return i;
     }
