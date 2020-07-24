@@ -14,12 +14,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderHeaderDao orderHeaderDao;
 
-
-//    public OrderHeader getOrderHeader() {
-//        return orderHeaderDao.getOrderHeader();
-//
-//    }
-
     public List<OrderLineQueryResult> selectOrderLinesByCondition(OrderLineQueryCondition condition) {
         return orderHeaderDao.selectOrderLinesByCondition(condition);
     }

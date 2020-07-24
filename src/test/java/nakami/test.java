@@ -114,7 +114,7 @@ public class test {
         SysUserServiceImpl sysUserService = applicationContext.getBean(SysUserServiceImpl.class);
         SysUser sysUser = new SysUser();
         sysUser.setUserId(14);
-        sysUser.setUserName("吴晓4");
+        sysUser.setUserName("吴晓5");
         sysUserService.updateUser(sysUser);
 
     }

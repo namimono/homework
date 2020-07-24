@@ -6,14 +6,31 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SysUserDao {
-    //    5.
+    /**
+     * 5.
+     * @param user 要插入的对象
+     * @return
+     */
     int insertUser(@Param("user") SysUser user);
 
-    //    6.
+    /**
+     * 6.根据userId进行更新
+     * @param user 要更新的对象
+     * @return
+     */
     int updateUser(@Param("user") SysUser user);
 
+    /**
+     * 根据userId查询
+     * @param user
+     * @return
+     */
     SysUser selectById(@Param("user") SysUser user);
 
-
-    int deleteUser(@Param("userId")Long userId);
+    /**
+     * 7.根绝userId删除数据
+     * @param userId 用户id
+     * @return
+     */
+    int deleteUser(@Param("userId") Long userId);
 }

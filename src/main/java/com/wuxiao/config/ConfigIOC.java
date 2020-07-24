@@ -25,9 +25,10 @@ import org.springframework.transaction.support.TransactionTemplate;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
+//开启事务后junit测试无法获取bean
 //@EnableTransactionManagement
 @Configuration
-//@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy
 @ComponentScan(value = "com.wuxiao.bussiness.*", excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Controller.class})
 })
@@ -62,10 +63,13 @@ public class ConfigIOC {
     public ISayAspect iSayAspect(){
         return new ISayAspect();
     }
-//    配置hikari数据源
+
+    /**
+     * 配置hikari数据源
+     * @return
+     */
     @Bean
     public DataSource dataSource(){
-//
         DruidDataSource dataSource=new DruidDataSource();
         dataSource.setUsername(user);
         dataSource.setUrl(url);
@@ -73,7 +77,12 @@ public class ConfigIOC {
         dataSource.setPassword(password);
         return dataSource;
     }
-//  整合mybatis
+
+    /**
+     * 整合mybatis
+     * @return
+     * @throws Exception
+     */
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
 //        给mybatis配置数据源
@@ -86,22 +95,22 @@ public class ConfigIOC {
         return sqlSessionFactoryBean.getObject();
     }
 
-//    @Bean
-//    public SqlSessionTemplate sqlSession() throws Exception {
-//        return new SqlSessionTemplate(sqlSessionFactory());
-//    }
+    @Bean
+    public SqlSessionTemplate sqlSession() throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory());
+    }
 
 
-//    配置事务管理器
+    /**
+     * 配置事务管理器
+     * @return
+     * @throws PropertyVetoException
+     */
     @Bean
     public DataSourceTransactionManager transactionManager() throws PropertyVetoException {
 
         return new DataSourceTransactionManager(dataSource());
     }
 
-//    @Bean
-//    public TransactionTemplate transactionTemplate() throws PropertyVetoException {
-//        return new TransactionTemplate(transactionManager());
-//    }
 
 }

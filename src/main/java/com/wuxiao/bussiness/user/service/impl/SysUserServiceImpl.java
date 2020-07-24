@@ -3,8 +3,6 @@ package com.wuxiao.bussiness.user.service.impl;
 import com.wuxiao.bussiness.model.SysUser;
 import com.wuxiao.bussiness.user.dao.SysUserDao;
 import com.wuxiao.bussiness.user.service.SysUserService;
-import com.wuxiao.utils.Utils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,20 +33,22 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Transactional
     public int updateUser(SysUser user) {
+//        查询数据库原有信息
         SysUser sysUser = sysUserDao.selectById(user);
-//        更新sysUser
-        Utils.copyPropertiesIgnoreNull(user,sysUser);
+//        设置版本号
+        user.setObjectVersionNumber(sysUser.getObjectVersionNumber());
 //        设置最后更新时间和更新人
-        sysUser.setLastUpdatedBy(1);
-        sysUser.setLastUpdateDate(new Date());
+        user.setLastUpdatedBy(1);
+        user.setLastUpdateDate(new Date());
 //        mysql乐观锁
         int flag = 0;
         while (flag == 0) {
-            flag = sysUserDao.updateUser(sysUser);
+            flag = sysUserDao.updateUser(user);
         }
-        return 0;
+        return flag;
     }
 
+    @Transactional
     public int deleteUser(Long userId) {
         return sysUserDao.deleteUser(userId);
     }

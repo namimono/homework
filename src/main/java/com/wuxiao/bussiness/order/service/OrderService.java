@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface OrderService {
 
-//    4.
+    /**
+     * 4.
+     * @param condition 查询条件
+     * @return
+     */
     List<OrderLineQueryResult> selectOrderLinesByCondition(OrderLineQueryCondition condition);
 }
