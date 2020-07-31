@@ -33,16 +33,17 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Transactional
     public int updateUser(SysUser user) {
-//        查询数据库原有信息
-        SysUser sysUser = sysUserDao.selectById(user);
-//        设置版本号
-        user.setObjectVersionNumber(sysUser.getObjectVersionNumber());
-//        设置最后更新时间和更新人
-        user.setLastUpdatedBy(1);
-        user.setLastUpdateDate(new Date());
 //        mysql乐观锁
         int flag = 0;
         while (flag == 0) {
+//        查询数据库原有信息
+            SysUser sysUser = sysUserDao.selectById(user);
+//        设置版本号
+            user.setObjectVersionNumber(sysUser.getObjectVersionNumber());
+//        设置最后更新时间和更新人
+            user.setLastUpdatedBy(1);
+            user.setLastUpdateDate(new Date());
+
             flag = sysUserDao.updateUser(user);
         }
         return flag;
